@@ -10,8 +10,7 @@ def create_json():
     with open('phone_file.json', 'w') as file:
         file.write(json.dumps(json_data, indent=2, ensure_ascii=False))
 
-
-# Добавляем в массив файла новый контакт. Надо сделать русский язык!
+# Добавляем в список файла новый контакт. Надо сделать русский язык!
 def add_to_json(contact):
     """
     Функция добавляет в массив файла новый контакт
@@ -61,38 +60,14 @@ def read_file():
 
         return print('\n'.join(map(str, json.load(read_file))))
 
-def read_index_file():
-    """
-    Функция считывает из файла объекты json 
-    и выводит их в виде списка.
-    Returns:
-        _type_: _description_
-    """
-    with open("phone_file.json", "r", encoding = 'utf-8') as read_index_file:
-        list_0 = json.load(open('phone_file.json', encoding = 'utf-8'))
-        
-        # return print('\n'.join(map(str, json.load(read_index_file))))
-        return print(list_0[:-1][:-2])
-
-read_index_file()
-
-from collections import OrderedDict
-# create_json()
-
-# add_to_json(contact_1)
-# add_to_json(contact_2)
-# add_to_json(contact_3)
-
-# read_file()
-
-
-id = 0
-
-# exit()
+#Выводит на экран приглашение к заполнению данных и вводит в базу
 def contact_input():
+    """
+    Просит пользователя ввести фамилию, имя, телефон и город,
+    а потом заносит в базу данных
 
-    # id += 1
-    id = 0
+    """
+    id = 22 #Не придумал, как обратиться к последнему элементу, вытащить значение id и прибавить 1
     sec_name = str(input("Введите фамилию: "))
     first_name = str(input("Введите имя: "))
     tel_number = str(input("Введите номер телефона: "))
@@ -104,9 +79,16 @@ def contact_input():
         "tel_number": tel_number,
         "adress": adress
     }
-    return contact_n
+    return add_to_json(contact_n)
 
-# n = contact_input()
-# print(n)
+# create_json()
 
-# add_to_json(contact_4)
+# add_to_json(contact_1)
+# add_to_json(contact_2)
+# add_to_json(contact_3)
+
+# read_file()
+
+contact_input()
+
+
