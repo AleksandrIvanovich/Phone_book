@@ -15,12 +15,11 @@ def create_json():
 def add_to_json(contact):
     """
     Функция добавляет в массив файла новый контакт
-
     Args:
         Создаём объект json, функция считывает 
         его под видом переменной contact и добавляет в список в файле phone_file.json
     """
-    card = json.load(open('phone_file.json'))
+    card = json.load(open('phone_file.json', encoding = 'utf-8'))
     card.append(contact)
     with open("phone_file.json", "w", encoding = 'utf-8') as file:
         return json.dump(card, file, indent=4, ensure_ascii=False)
@@ -35,10 +34,10 @@ contact_1 = {
 
 contact_2 = {
     "id": 2,
-    "sec_name": '', 
-    "first_name": 'ufviuc',
+    "sec_name": 'Глазунов', 
+    "first_name": 'Григорий',
     "tel_number": '+71938760789',
-    "adress": 'lvjhvjhvljvh'
+    "adress": 'Ахтубинск'
 }
 
 contact_3 = {
@@ -55,20 +54,19 @@ def read_file():
     """
     Функция считывает из файла объекты json 
     и выводит их в виде списка.
-
     Returns:
         _type_: _description_
     """
     with open("phone_file.json", "r", encoding = 'utf-8') as read_file:
-        return print(f'{json.load(read_file)}' + '\n')
+        return print('\n'.join(map(str, json.load(read_file))))
 
 # create_json()
 
 # add_to_json(contact_1)
 # add_to_json(contact_2)
-add_to_json(contact_3)
+# add_to_json(contact_3)
 
-# read_file()
+read_file()
+
 
 # exit()
-
