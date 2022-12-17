@@ -58,15 +58,55 @@ def read_file():
         _type_: _description_
     """
     with open("phone_file.json", "r", encoding = 'utf-8') as read_file:
+
         return print('\n'.join(map(str, json.load(read_file))))
 
+def read_index_file():
+    """
+    Функция считывает из файла объекты json 
+    и выводит их в виде списка.
+    Returns:
+        _type_: _description_
+    """
+    with open("phone_file.json", "r", encoding = 'utf-8') as read_index_file:
+        list_0 = json.load(open('phone_file.json', encoding = 'utf-8'))
+        
+        # return print('\n'.join(map(str, json.load(read_index_file))))
+        return print(list_0[:-1][:-2])
+
+read_index_file()
+
+from collections import OrderedDict
 # create_json()
 
 # add_to_json(contact_1)
 # add_to_json(contact_2)
 # add_to_json(contact_3)
 
-read_file()
+# read_file()
 
+
+id = 0
 
 # exit()
+def contact_input():
+
+    # id += 1
+    id = 0
+    sec_name = str(input("Введите фамилию: "))
+    first_name = str(input("Введите имя: "))
+    tel_number = str(input("Введите номер телефона: "))
+    adress = str(input("Введите адрес: "))
+    contact_n ={ 
+        "id": id,
+        "sec_name": sec_name, 
+        "first_name": first_name,
+        "tel_number": tel_number,
+        "adress": adress
+    }
+    return contact_n
+
+# n = contact_input()
+# print(n)
+
+# add_to_json(contact_4)
