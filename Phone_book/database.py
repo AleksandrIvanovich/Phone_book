@@ -28,7 +28,7 @@ contact_1 = {
     "sec_name": 'Тюрин', 
     "first_name": 'Роман',
     "tel_number": '+71238760789',
-    "adress": 'Нижний Новгород'
+    "address": 'Нижний Новгород'
 }
 
 contact_2 = {
@@ -36,7 +36,7 @@ contact_2 = {
     "sec_name": 'Глазунов', 
     "first_name": 'Григорий',
     "tel_number": '+71938760789',
-    "adress": 'Ахтубинск'
+    "address": 'Ахтубинск'
 }
 
 contact_3 = {
@@ -44,21 +44,26 @@ contact_3 = {
     "sec_name": 'Чернов', 
     "first_name": 'Владимир',
     "tel_number": '+71238760789',
-    "adress": 'Минск'
+    "address": 'Муром'
 }
 
 
-# Считываем записанный файл 
-def read_file():
+# Считываем записанный файл и возвращаем список
+def read_file_list():
     """
     Функция считывает из файла объекты json 
     и выводит их в виде списка.
     Returns:
         _type_: _description_
     """
-    with open("phone_file.json", "r", encoding = 'utf-8') as read_file:
+    with open("phone_file.json", "r", encoding = 'utf-8') as read:
 
-        return print('\n'.join(map(str, json.load(read_file))))
+        # return print('\n'.join(map(str, json.load(read_file))))
+        # return '\n'.join(map(str, json.load(read_file)))
+        return json.load(read)
+    
+# print(read_file_list())
+# print(type(read_file()))
 
 #Выводит на экран приглашение к заполнению данных и вводит в базу
 def contact_input():
@@ -67,28 +72,55 @@ def contact_input():
     а потом заносит в базу данных
 
     """
-    id = 22 #Не придумал, как обратиться к последнему элементу, вытащить значение id и прибавить 1
+    id = search_last_id()+1 #Не придумал, как обратиться к последнему элементу, вытащить значение id и прибавить 1
     sec_name = str(input("Введите фамилию: "))
     first_name = str(input("Введите имя: "))
     tel_number = str(input("Введите номер телефона: "))
-    adress = str(input("Введите адрес: "))
+    address = str(input("Введите адрес: "))
     contact_n ={ 
         "id": id,
         "sec_name": sec_name, 
         "first_name": first_name,
         "tel_number": tel_number,
-        "adress": adress
+        "adress": address
     }
     return add_to_json(contact_n)
 
+#Поиск значения id в последнем заведённом контакте
+def search_last_id():
+    """
+    Возвращает значение id в последнем заведённом контакте
+
+    Returns:
+        _type_: _description_
+    """
+    with open("phone_file.json", "r", encoding = 'utf-8') as file:
+        cards = json.load(file)
+        dict_card = cards[-1:]
+        last_id = dict_card[0]
+        last_id_2 = last_id['id']
+    return last_id_2
+
+# print(search_last_id())
+
 # create_json()
 
-# add_to_json(contact_1)
+# add_to_json(contact_1) #Добавляем заданную карточку
 # add_to_json(contact_2)
 # add_to_json(contact_3)
 
-# read_file()
+contact_input() #Выводит на экран приглашение к заполнению данных и вводит в базу
 
-contact_input()
+#Ищем по имени или фамилии. Выводит карточку полностью
+def search_name(name):
+    with open("phone_file.json", "r", encoding = 'utf-8') as file:
+        cards = json.load(file)
+        for i in range(0, len(cards)):
+            if name == cards[i]['sec_name'] or name == cards[i]['first_name']:
+                print(str(cards[i]))
+                # print('\n'.join(map(str, (cards[i])))) #Показывает только ключ
+                # print('\n'.join(str(cards[i]))) #Выстраивает в столбик все символы карточки
+
+# search_name('Уваров')
 
 
